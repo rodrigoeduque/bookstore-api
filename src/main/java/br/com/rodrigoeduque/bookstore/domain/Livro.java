@@ -1,14 +1,19 @@
 package br.com.rodrigoeduque.bookstore.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Livro {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String autor;
     private String descricao;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Livro() {
