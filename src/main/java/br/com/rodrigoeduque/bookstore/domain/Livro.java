@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Livro {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Integer id;
     private String titulo;
     private String autor;
