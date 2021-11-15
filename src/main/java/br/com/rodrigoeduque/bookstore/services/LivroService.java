@@ -13,10 +13,12 @@ import java.util.Optional;
 public class LivroService {
 
   private LivroRepository repository;
+  private CategoriaService categoriaService;
 
   @Autowired
-  public LivroService(LivroRepository repository) {
+  public LivroService(LivroRepository repository, CategoriaService categoriaService) {
     this.repository = repository;
+    this.categoriaService = categoriaService;
   }
 
   public Livro findById(Integer id) {
@@ -27,5 +29,11 @@ public class LivroService {
   public List<Livro> findAll() {
     List<Livro> list = repository.findAll();
     return list;
+  }
+
+  public List<Livro> findAllByCategoria(Integer id_cat) {
+    categoriaService.findById(id_cat);
+    List<Livro> allByCategoria = repository.findAllByCategoria(id_cat);
+    return allByCategoria;
   }
 }
