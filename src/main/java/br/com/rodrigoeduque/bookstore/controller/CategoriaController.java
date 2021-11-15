@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponents;
 
 import java.net.URI;
 import java.util.List;
@@ -42,5 +41,11 @@ public class CategoriaController {
     Categoria categoria = service.create(obj);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
     return ResponseEntity.created(uri).build();
+  }
+
+  @PutMapping(value = "/{id}")
+  public ResponseEntity<CategoriaDTO> update(@PathVariable Integer id, @RequestBody CategoriaDTO categoriaDTO) {
+    Categoria newObj = service.update(id, categoriaDTO);
+    return ResponseEntity.ok().body(new CategoriaDTO(newObj));
   }
 }
