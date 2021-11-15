@@ -29,4 +29,8 @@ public class CategoriaService {
     List<Categoria> obj = categoriaRepository.findAll();
     return obj;
   }
+
+  public Categoria create(Categoria obj) {
+    return categoriaRepository.save(obj);
+  }
 }

@@ -1,6 +1,5 @@
 package br.com.rodrigoeduque.bookstore.dtos.livros;
 
-import br.com.rodrigoeduque.bookstore.domain.Categoria;
 import br.com.rodrigoeduque.bookstore.domain.Livro;
 
 public class LivroDTO {
