@@ -1,6 +1,8 @@
 package br.com.rodrigoeduque.bookstore.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +13,11 @@ public class Categoria {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   private Integer id;
+  @NotEmpty
+  @Size(min = 3, max = 50)
   private String nome;
+  @NotEmpty
+  @Size(min = 3, max = 300)
   private String descricao;
 
   @OneToMany(mappedBy = "categoria")

@@ -3,6 +3,9 @@ package br.com.rodrigoeduque.bookstore.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -11,11 +14,18 @@ public class Livro {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   private Integer id;
+  @NotEmpty
+  @Size(min = 3, max = 100)
   private String titulo;
+  @NotEmpty
+  @Size(min = 3, max = 50)
   private String autor;
+  @NotEmpty
+  @Size(min = 10, max = 300)
   private String descricao;
 
   @JsonIgnore
+  @NotNull
   @ManyToOne
   @JoinColumn(name = "categoria_id")
   private Categoria categoria;
