@@ -41,4 +41,16 @@ public class LivroController {
     List<LivroDTO> listDto = list.stream().map(livro -> new LivroDTO(livro)).collect(Collectors.toList());
     return ResponseEntity.ok().body(listDto);
   }
+
+  @PutMapping(value = "/{id}")
+  public ResponseEntity<Livro> update(@PathVariable Integer id, @RequestBody Livro obj) {
+    Livro newObj = service.update(id, obj);
+    return ResponseEntity.ok().body(newObj);
+  }
+
+  @PatchMapping(value = "/{id}")
+  public ResponseEntity<Livro> updateParcial(@PathVariable Integer id, @RequestBody Livro obj) {
+    Livro newObj = service.update(id, obj);
+    return ResponseEntity.ok().body(newObj);
+  }
 }

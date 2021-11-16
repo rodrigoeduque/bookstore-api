@@ -36,4 +36,19 @@ public class LivroService {
     List<Livro> allByCategoria = repository.findAllByCategoria(id_cat);
     return allByCategoria;
   }
+
+
+  public Livro update(Integer id, Livro obj) {
+    Livro newObj = findById(id);
+    updateData(newObj, obj);
+    return repository.save(newObj);
+
+  }
+
+  private void updateData(Livro newObj, Livro obj) {
+    newObj.setCategoria(obj.getCategoria());
+    newObj.setDescricao(obj.getDescricao());
+    newObj.setTitulo(obj.getTitulo());
+    newObj.setAutor(obj.getAutor());
+  }
 }
