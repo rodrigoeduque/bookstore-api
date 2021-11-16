@@ -51,4 +51,13 @@ public class LivroService {
     newObj.setTitulo(obj.getTitulo());
     newObj.setAutor(obj.getAutor());
   }
+
+  public Livro create(Livro livro) {
+    Livro obj = repository.save(livro);
+    return obj;
+  }
+
+  public void deleteById(Integer id) {
+    repository.deleteById(id);
+  }
 }

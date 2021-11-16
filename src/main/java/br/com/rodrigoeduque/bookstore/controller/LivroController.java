@@ -6,7 +6,9 @@ import br.com.rodrigoeduque.bookstore.services.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,5 +54,18 @@ public class LivroController {
   public ResponseEntity<Livro> updateParcial(@PathVariable Integer id, @RequestBody Livro obj) {
     Livro newObj = service.update(id, obj);
     return ResponseEntity.ok().body(newObj);
+  }
+
+  @PostMapping
+  public ResponseEntity<?> create(@RequestBody Livro livro) {
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
+    Livro obj = service.create(livro);
+    return ResponseEntity.created(uri).body(obj);
+  }
+
+  @DeleteMapping(value = "/{id}")
+  public ResponseEntity<?> delete(@PathVariable Integer id) {
+    service.deleteById(id);
+    return ResponseEntity.noContent().build();
   }
 }
