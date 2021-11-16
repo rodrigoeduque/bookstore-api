@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,10 +39,12 @@ public class CategoriaController {
   }
 
   @PostMapping
-  public ResponseEntity<Categoria> create(@RequestBody Categoria obj) {
-    Categoria categoria = service.create(obj);
+  public ResponseEntity<CategoriaDTO> create(@Valid @RequestBody CategoriaDTO obj) {
+    Categoria categoria = new Categoria(obj.getNome(), obj.getDescricao());
+    service.create(categoria);
+
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
-    return ResponseEntity.created(uri).build();
+    return ResponseEntity.created(uri).body(obj);
   }
 
   @PutMapping(value = "/{id}")
@@ -51,7 +54,7 @@ public class CategoriaController {
   }
 
   @DeleteMapping(value = "/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Integer id) {
+  public ResponseEntity<?> delete(@PathVariable Integer id) {
     service.delete(id);
     return ResponseEntity.noContent().build();
   }
