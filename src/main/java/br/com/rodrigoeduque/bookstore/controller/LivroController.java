@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,19 +47,20 @@ public class LivroController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<Livro> update(@PathVariable Integer id, @RequestBody Livro obj) {
+  public ResponseEntity<LivroDTO> update(@Valid @PathVariable Integer id, @RequestBody Livro obj) {
     Livro newObj = service.update(id, obj);
-    return ResponseEntity.ok().body(newObj);
+    LivroDTO livroDTO = new LivroDTO(newObj);
+    return ResponseEntity.ok().body(livroDTO);
   }
 
   @PatchMapping(value = "/{id}")
-  public ResponseEntity<Livro> updateParcial(@PathVariable Integer id, @RequestBody Livro obj) {
+  public ResponseEntity<Livro> updateParcial(@Valid @PathVariable Integer id, @RequestBody Livro obj) {
     Livro newObj = service.update(id, obj);
     return ResponseEntity.ok().body(newObj);
   }
 
   @PostMapping
-  public ResponseEntity<?> create(@RequestBody Livro livro) {
+  public ResponseEntity<?> create(@Valid @RequestBody Livro livro) {
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
     Livro obj = service.create(livro);
     return ResponseEntity.created(uri).body(obj);

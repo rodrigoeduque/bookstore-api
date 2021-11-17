@@ -14,14 +14,8 @@ public class Livro {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   private Integer id;
-  @NotEmpty
-  @Size(min = 3, max = 100)
   private String titulo;
-  @NotEmpty
-  @Size(min = 3, max = 50)
   private String autor;
-  @NotEmpty
-  @Size(min = 10, max = 300)
   private String descricao;
 
   @JsonIgnore

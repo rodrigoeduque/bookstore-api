@@ -2,9 +2,16 @@ package br.com.rodrigoeduque.bookstore.dtos.categorias;
 
 import br.com.rodrigoeduque.bookstore.domain.Categoria;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class CategoriaDTO {
 
+  @NotEmpty
+  @Size(min = 3, max = 50)
   private String nome;
+  @NotEmpty
+  @Size(min = 3, max = 300)
   private String descricao;
 
   public CategoriaDTO() {

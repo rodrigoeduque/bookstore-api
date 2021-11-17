@@ -13,11 +13,7 @@ public class Categoria {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   private Integer id;
-  @NotEmpty
-  @Size(min = 3, max = 50)
   private String nome;
-  @NotEmpty
-  @Size(min = 3, max = 300)
   private String descricao;
 
   @OneToMany(mappedBy = "categoria")
