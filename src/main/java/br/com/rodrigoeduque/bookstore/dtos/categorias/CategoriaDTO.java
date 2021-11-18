@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 public class CategoriaDTO {
 
+  private Integer id;
   @NotEmpty
   @Size(min = 3, max = 50)
   private String nome;
@@ -19,6 +20,7 @@ public class CategoriaDTO {
   }
 
   public CategoriaDTO(Categoria categoria) {
+    this.id = categoria.getId();
     this.nome = categoria.getNome();
     this.descricao = categoria.getDescricao();
   }
@@ -41,5 +43,9 @@ public class CategoriaDTO {
 
   public CategoriaDTO toModel(Categoria categoria) {
     return new CategoriaDTO(categoria);
+  }
+
+  public Integer getId() {
+    return id;
   }
 }
